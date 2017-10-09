@@ -1,0 +1,47 @@
+[NonFunctionalRequirements]
+int RetentionTime: max
+int Price: +
+int Delay: +
+[Types]
+Thing;
+[Constants]
+yes:Thing
+
+[InterpretedLiterals]
+EQ
+LE
+LEQ
+GEQ
+GE
+DA
+DB
+[Rules]
+x:Thing,y:Thing,z:Thing;				!isAvailability(x,y,z) | !EQ(z,yes) | hasBook(x,y)
+
+#x:Thing,y:Thing,z:Thing;				!isDeliverTime(x,y,z) | !LEQ(z,1) | hasBook(x,y)
+#x:Thing,y:Thing,z:Thing;				!d3(x,y,z) | !LEQ(z,1) | hasBook(x,y)
+#x:Thing,y:Thing,z:Thing;				!d4(x,y,z) | !GEQ(z,1) | hasBook(x,y)
+#x:Thing,y:Thing,z:Thing;				!d5(x,y,z) | !LE(z,1) | hasBook(x,y)
+#x:Thing,y:Thing,z:Thing;				!d6(x,y,z) | !GE(z,1) | hasBook(x,y)
+#x:Thing,y:Thing,z:Thing;				!d7(x,y,z) | !DA(z,1) | hasBook(x,y)
+#x:Thing,y:Thing,z:Thing;				!d8(x,y,z) | !DB(z,1) | hasBook(x,y)
+
+
+#x:Thing,y:Thing,z:Thing;				!PriceOf(y,x) | !LE(y,z) | CheaperThan(x,z)
+#x1:Thing,x2:Thing,y1:Thing,y2:Thing;	!PriceOf(y1,x1) | !PriceOf(y2,x2) | !LEQ(y1,y2) | ComparesCheaper(x1,x2)
+#x1:Thing,x2:Thing,y1:Thing,y2:Thing;	!V1(y1,x1) | !V1(y2,x2) | !EQ(y1,y2) | ComparesCheaper(x1,x2)
+#x1:Thing,x2:Thing,y1:Thing,y2:Thing;	!V2(y1,x1) | !V2(y2,x2) | !GEQ(y1,y2) | ComparesCheaper(x1,x2)
+#x1:Thing,x2:Thing,y1:Thing,y2:Thing;	!V3(y1,x1) | !V3(y2,x2) | !GE(y1,y2) | ComparesCheaper(x1,x2)
+#x1:Thing,x2:Thing,y1:Thing,y2:Thing;	!V4(y1,x1) | !V4(y2,x2) | !LE(y1,y2) | ComparesCheaper(x1,x2)
+
+
+x:Thing,y:Thing;						!EQ(x,y) | EQ(y,x)
+x:Thing,y:Thing;						!NEQ(x,y) | NEQ(y,x)
+x:Thing,y:Thing,z:Thing;				!EQ(x,y) | !EQ(y,z) | EQ(x,z)
+x:Thing,y:Thing,z:Thing;				!LEQ(x,y) | !LEQ(y,z) | LEQ(x,z)
+[Services]
+serv398; i1:Thing; o1:Thing; T(i1); T(o1) & A397(i1,o1);(0,0,0)
+serv399; i1:Thing; o1:Thing; T(i1); T(o1) & A398(i1,o1);(0,0,0)
+serv400; i1:Thing; o1:Thing; T(i1); T(o1) & A399(i1,o1);(0,0,0)
+getAvailability; s:Thing,b:Thing; a:Thing; Store(s) & Book(b); isAvailability(s, b, a);(0,0,0)
+getPrice; i:Thing; p:Thing; ; PriceOf(p,i);(0,0,0)

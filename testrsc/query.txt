@@ -1,0 +1,2 @@
+hasBook(X,x)
+ComparesCheaper(X,x)

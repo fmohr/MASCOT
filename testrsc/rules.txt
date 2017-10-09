@@ -1,0 +1,8 @@
+isAvailability(x,y,z) & EQ(z,'yes') -> hasBook(x,y)
+isDeliverTime(x,y,z) & LEQ(z,'1') -> hasBook(x,y)
+PriceOf(y,x) & LE(y,z) -> CheaperThan(x,z)
+PriceOf(y1,x1) & PriceOf(y2,x2) & LEQ(y1,y2) -> ComparesCheaper(x1,x2)
+EQ(x,y) -> EQ(y,x)
+NEQ(x,y) -> NEQ(y,x)
+EQ(x,y) & EQ(y,z) -> EQ(x,z)
+LEQ(x,y) & LEQ(y,z) -> LEQ(x,z)

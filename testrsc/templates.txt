@@ -1,0 +1,62 @@
+# raute markiert kommentar
+# einfache Leerzeile wird ignoriert
+# doppelte Leerzeile terminiert Templatebeschreibung
+
+
+
+# Minimizer with binary output predicate
+IN: A
+OUT: a
+PRE: 
+POST: ABSTRACT_R2(A, a)
+RULE+: POST_C2(a, y) & POST_C2(b, tmpval) & ABSTRACT_F(y,tmpval) --> ABSTRACT_R2(a, b)
+RULE+: ABSTRACT_F(x,y) & ABSTRACT_F(y,z) --> ABSTRACT_F(x,z)
+RULE-: POST_C2(a,y) --> ABSTRACT_R2(a, y)
+RULE-: POST_C2(a,y) --> ABSTRACT_R2(y, a)
+RULE-: POST_C2(a,y) & ABSTRACT_F(y,obsolete) --> ABSTRACT_R2(a, y)
+RULE-: POST_C2(a,y) & ABSTRACT_F(y,obsolete) --> ABSTRACT_R2(y, a)
+RULE-: POST_C2(a,y) & ABSTRACT_F(obsolete, y) --> ABSTRACT_R2(a, y)
+RULE-: POST_C2(a,y) & ABSTRACT_F(obsolete, y) --> ABSTRACT_R2(y, a)
+helperpred:ABSTRACT_R2(x,y)
+begin
+	out := nil
+	tmpval := nil
+	i := 0
+	while i < n do
+		a := A[i]
+		(y) := C2(a)
+		if boolpred:ABSTRACT_F(y,tmpval) then
+			out := a
+			tmpval := y
+		end
+		i := i + 1
+	end
+	return out
+end
+
+
+
+
+## filter
+IN: A,b
+OUT: A'
+PRE: PRE_C1(A,b)
+POST: ABSTRACT_R2(A',b)
+RULE+: POST_C1(a, b, y) & ABSTRACT_F(y) --> ABSTRACT_R2(a,b)
+RULE-: POST_C1(a, b, y) --> ABSTRACT_R2(a, b)
+helperpred:ABSTRACT_R2(x,y)
+begin
+	A' := new array
+	n := 0
+	i := 0
+	while i < n do
+		a := A[i]
+		(y) := C1(a,b)
+		if boolpred:ABSTRACT_F(y) then
+			A'[n'] := a
+			n' := n' + 1
+		end
+		i := i + 1
+	end
+	return A'
+end

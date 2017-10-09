@@ -1,0 +1,5 @@
+T1	false	t1v1,t1v2,t1v3,t1v4,t1v5,t1v6,t1v7
+T2	false	t2v1,t2v2,t2v3,t2v4,t2v5,t2v6
+T3	false	t3v1,t3v2,t3v3,t3v4,t3v5,t3v6
+T4	false	t4v1,t4v2,t4v3,t4v4,t4v5
+T5	false	
